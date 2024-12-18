@@ -1,16 +1,15 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: tbenn
-  Date: 12/18/2024
-  Time: 12:02 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+
+<section class="bg-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p class="para" style="text-align: center">© 2024 Ben' website. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
 
 </body>
 </html>
