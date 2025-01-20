@@ -1,82 +1,72 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<head>
+  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+  <jsp:include page="../include/header.jsp"/>
+  <link href="/pub/css/global.css" rel="stylesheet">
+  <link href="/pub/css/signup.css" rel="stylesheet">
+</head>
 
-<jsp:include page="../include/header.jsp"/>
+<div class="auth-container">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="form-section">
+        <h2 class="text-center mb-4">Create Account</h2>
 
-<section class="bg-light1 pt-5 pb-5">
-  <div class="container">
-    <div class="row">
-      <h1 class="m-0 text-center">Sign Up</h1>
+        <form action="/login/signupSubmit" method="post">
+          <!-- Username -->
+          <div class="row mb-4">
+            <div class="col-md-8 mx-auto">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control form-control-lg" id="username" name="username" value="">
+              <c:if test="${bindingResult.hasFieldErrors('username')}">
+                <c:forEach var="error" items="${bindingResult.getFieldErrors('username')}">
+                  <div class="form_input_error">${error.getDefaultMessage()}</div>
+                </c:forEach>
+              </c:if>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="row mb-4">
+            <div class="col-md-8 mx-auto">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control form-control-lg" id="password" name="password" value="">
+              <c:if test="${bindingResult.hasFieldErrors('password')}">
+                <c:forEach var="error" items="${bindingResult.getFieldErrors('password')}">
+                  <div class="form_input_error">${error.getDefaultMessage()}</div>
+                </c:forEach>
+              </c:if>
+            </div>
+          </div>
+
+          <!-- Full Name -->
+          <div class="row mb-4">
+            <div class="col-md-8 mx-auto">
+              <label for="fullname" class="form-label">Full Name</label>
+              <input type="text" class="form-control form-control-lg" id="fullname" name="fullname" value="">
+              <c:if test="${bindingResult.hasFieldErrors('fullname')}">
+                <c:forEach var="error" items="${bindingResult.getFieldErrors('fullname')}">
+                  <div class="form_input_error">${error.getDefaultMessage()}</div>
+                </c:forEach>
+              </c:if>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="row">
+            <div class="col-md-8 mx-auto">
+              <button type="submit" class="btn btn-primary btn-lg w-100">Create Account</button>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-8 mx-auto text-center">
+              <p>Already have an account? <a href="/login/login">Login here</a></p>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="bg-light2 pt-5 pb-5">
-  <div class="container">
-    <form action="/login/signupSubmit" method="post">
-
-      <!-- =========== USERNAME FOR SIGNING UP ================= -->
-      <div class="mt-3 row justify-content-center">
-        <label for="username" class="col-sm-2 col-form-label">Username</label>
-        <div class="col-sm-10 col-lg-6">
-          <input type="text" class="form-control" id="username" name="username" value="">
-        </div>
-      </div>
-
-      <c:if test="${bindingResult.hasFieldErrors('username')}">
-        <div class="row justify-content-center">
-          <div class="col-sm-2"></div>
-          <div class="col-sm-10 col-lg-6">
-            <c:forEach var="error" items="${bindingResult.getFieldErrors('username')}">
-              <dd class="mb-0 form_input_error">${error.getDefaultMessage()}</dd>
-            </c:forEach>
-          </div>
-        </div>
-      </c:if>
-
-      <!-- =========== PASSWORD FOR SIGNING UP ================= -->
-      <div class="mt-3 row justify-content-center">
-        <label for="password" class="col-sm-2 col-form-label">Password</label>
-        <div class="col-sm-10 col-lg-6">
-          <input type="password" class="form-control" id="password" name="password" value="">
-        </div>
-      </div>
-      <c:if test="${bindingResult.hasFieldErrors('password')}">
-        <div class="row justify-content-center">
-          <div class="col-sm-2"></div>
-          <div class="col-sm-10 col-lg-6">
-            <c:forEach var="error" items="${bindingResult.getFieldErrors('password')}">
-              <dd class="mb-0 form_input_error">${error.getDefaultMessage()}</dd>
-            </c:forEach>
-          </div>
-        </div>
-      </c:if>
-
-      <!-- =========== FIRST NAME FOR SIGNING UP ================= -->
-      <div class="mt-3 row justify-content-center">
-        <label for="fullname" class="col-sm-2 col-form-label">Full Name</label>
-        <div class="col-sm-10 col-lg-6">
-          <input type="text" class="form-control" id="fullname" name="fullname" value="">
-        </div>
-      </div>
-      <c:if test="${bindingResult.hasFieldErrors('fullname')}">
-        <div class="row justify-content-center">
-          <div class="col-sm-2"></div>
-          <div class="col-sm-10 col-lg-6">
-            <c:forEach var="error" items="${bindingResult.getFieldErrors('fullname')}">
-              <dd class="mb-0 form_input_error">${error.getDefaultMessage()}</dd>
-            </c:forEach>
-          </div>
-        </div>
-      </c:if>
-
-      <!-- =========== SUBMITTING FOR SIGNING UP ================= -->
-      <div class="mt-3 row justify-content-center">
-        <div class="col-sm-12 col-lg-8">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</section>
-
-<%--<jsp:include page="../include/footer.jsp" />--%>
+<jsp:include page="../include/footer.jsp"/>

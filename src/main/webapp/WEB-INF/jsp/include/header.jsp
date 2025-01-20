@@ -24,15 +24,14 @@
 <body>
 
 
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <!-- Brand -->
         <a class="navbar-brand me-4" href="/">Soccer Store</a>
 
         <!-- Mobile toggle button -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+            <span class="navbar-toggle-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -42,40 +41,39 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
 
-                <!-- Products -->
-                <sec:authorize access="hasAnyAuthority('USER')">
-                    <li class="nav-item dropdown mx-2">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            Products
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/product/search">Search Products</a></li>
+                <!-- Products - Available to all -->>
+                <li class="nav-item dropdown mx-2">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Products
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/product/search">Browse Products</a></li>
+                        <!-- Only show create/edit options to admins -->
+                        <sec:authorize access="hasAuthority('ADMIN')">
                             <li><a class="dropdown-item" href="/product/create">Create Product</a></li>
-                        </ul>
-                    </li>
+                        </sec:authorize>
+                    </ul>
+                </li>
 
-                    <!-- Users -->
-                    <li class="nav-item dropdown mx-2">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            Users
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/user/createUser">Create User</a></li>
-                            <li><a class="dropdown-item" href="/user/search">Search Users</a></li>
-                        </ul>
+                <!-- Users - Only for authenticated users -->
+                <sec:authorize access="isAuthenticated()">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/user/profile">My Profile</a>
                     </li>
                 </sec:authorize>
 
 
-                <!-- Admin -->
-                <sec:authorize access="hasAnyAuthority('ADMIN')">
+                <!-- Admin - Only for admins -->
+                <sec:authorize access="hasAuthority('ADMIN')">
                     <li class="nav-item dropdown mx-2">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             Admin
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/admin/dashboard">Dashboard</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="/admin/users">Manage Users</a></li>
                             <li><a class="dropdown-item" href="/admin/products">Manage Products</a></li>
                         </ul>
@@ -101,7 +99,9 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="/user/profile">My Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item text-danger" href="/login/logout">Logout</a></li>
                         </ul>
                     </li>
@@ -109,5 +109,5 @@
             </ul>
         </div>
     </div>
-</nav>
+</div>
 

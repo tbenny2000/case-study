@@ -1,0 +1,15 @@
+/* Login-specific styles */
+.login-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 1rem;
+}

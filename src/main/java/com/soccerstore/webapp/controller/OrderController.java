@@ -238,7 +238,7 @@ public class OrderController {
         Order cart = orderDAO.findByUserIdAndOrderStatus(user.getId(), "CART");
         if (cart != null) {
             List<OrderDetail> details = orderDetailDAO.findByOrdersIdAndProductId(cart.getId(), id);
-            if (details.size() > 0) {
+            if (!details.isEmpty()) {
                 OrderDetail detail = details.get(0);
                 if (quantity == 0) {
                     orderDetailDAO.delete(detail);
@@ -254,5 +254,84 @@ public class OrderController {
         }
 
         return new ModelAndView("redirect:/order/cart");
+    }
+
+    @GetMapping("/order/checkout")
+    public ModelAndView showCheckout() {
+        ModelAndView response = new ModelAndView("order/checkout");
+
+        User user = authenticatedUserService.loadCurrentUser();
+        if (user == null) {
+            return new ModelAndView("redirect:/login/login");
+        }
+
+        // Get current cart
+        Order cart = orderDAO.findByUserIdAndOrderStatus(user.getId(), "CART");
+        if (cart == null) {
+            return new ModelAndView("redirect:/order/cart");
+        }
+
+        // Get cart items and calculate total
+        List<OrderDetail> details = orderDetailDAO.findByOrdersId(cart.getId());
+        double total = 0.0;
+        List<CartItemDTO> cartItems = new ArrayList<>();
+
+        for (OrderDetail detail : details) {
+            Product product = productDAO.findProductById(detail.getProductId());
+            CartItemDTO item = new CartItemDTO();
+            item.setProduct(product);
+            item.setQuantity(detail.getQuantity());
+            item.setPrice(detail.getPrice());
+            cartItems.add(item);
+            total += detail.getQuantity() * detail.getPrice();
+        }
+
+        response.addObject("cartItems", cartItems);
+        response.addObject("total", total);
+
+        return response;
+    }
+
+    @PostMapping("/order/placeOrder")
+    public ModelAndView placeOrder(@RequestParam(required = false) String comments) {
+        ModelAndView response = new ModelAndView("order/confirmation");
+
+        User user = authenticatedUserService.loadCurrentUser();
+        if (user == null) {
+            return new ModelAndView("redirect:/login/login");
+        }
+
+        // Get current cart
+        Order cart = orderDAO.findByUserIdAndOrderStatus(user.getId(), "CART");
+        if (cart != null) {
+            // Update order
+            cart.setOrderStatus("PLACED");
+            cart.setOrderDate(LocalDateTime.now());
+            cart.setComments(comments);
+
+            // Save order
+            orderDAO.save(cart);
+
+            // Get order details for confirmation
+            List<OrderDetail> details = orderDetailDAO.findByOrdersId(cart.getId());
+            List<CartItemDTO> cartItems = new ArrayList<>();
+            double total = 0.0;
+
+            for (OrderDetail detail : details) {
+                Product product = productDAO.findProductById(detail.getProductId());
+                CartItemDTO item = new CartItemDTO();
+                item.setProduct(product);
+                item.setQuantity(detail.getQuantity());
+                item.setPrice(detail.getPrice());
+                cartItems.add(item);
+                total += detail.getQuantity() * detail.getPrice();
+            }
+
+            response.addObject("order", cart);
+            response.addObject("cartItems", cartItems);
+            response.addObject("total", total);
+        }
+
+        return response;
     }
 }

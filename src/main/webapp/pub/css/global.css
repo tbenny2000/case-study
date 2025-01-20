@@ -1,117 +1,137 @@
-/* Background Colors */
-.bg-header {
-    background-color: #99CCFF;
+/*!* Background Colors *!*/
+/*.bg-header {*/
+/*    background-color: #99CCFF;*/
+/*}*/
+
+/*.bg-light1 {*/
+/*    background-color: #b0d8ff;*/
+/*}*/
+
+/*.bg-light2 {*/
+/*    background-color: #d2e9ff;*/
+/*}*/
+
+/*.bg-light3 {*/
+/*    background-color: #f4f9ff;*/
+/*}*/
+
+/*!* Navbar Styles *!*/
+/*.navbar .nav-item {*/
+/*    margin: 0 0.5rem;*/
+/*}*/
+
+/*.navbar .dropdown-menu {*/
+/*    margin-top: 0.5rem;*/
+/*}*/
+
+/*!* Card Styles with specific width *!*/
+/*.card {*/
+/*    transition: transform 0.2s ease;*/
+/*    height: auto;*/
+/*    width: 160px;*/
+/*}*/
+
+/*.card:hover {*/
+/*    transform: translateY(-5px);*/
+/*}*/
+
+/*!* smaller padding *!*/
+/*.card-body {*/
+/*    padding: 0.5rem;*/
+/*    flex: none;*/
+/*}*/
+
+/*!* Card Image size *!*/
+/*.card-img-top {*/
+/*    width: 80px;*/
+/*    height: 80px;*/
+/*    object-fit: contain;*/
+/*    margin: 5px auto;*/
+/*    display: block;*/
+/*}*/
+
+/*!* Card Text *!*/
+/*.card-title {*/
+/*    font-size: 0.85rem;*/
+/*    margin-bottom: 0.3rem;*/
+/*}*/
+
+/*.card-text {*/
+/*    font-size: 0.75rem;*/
+/*    margin-bottom: 0.3rem;*/
+/*}*/
+
+/*!* Make buttons smaller *!*/
+/*.card .btn {*/
+/*    padding: 0.2rem 0.4rem;*/
+/*    font-size: 0.75rem;*/
+/*}*/
+
+/*!* Grid Layout Col *!*/
+/*!* Reduce padding between cards *!*/
+/*.col {*/
+/*    padding: 0.3rem;*/
+/*    margin-bottom: 0.5rem;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*.col {*/
+/*    margin-bottom: 1rem;*/
+/*    margin-left: 0;*/
+/*    margin-right: 0;*/
+/*}*/
+
+/*!* Compensate for smaller col padding *!*/
+/*.row {*/
+/*    margin: 0 -0.3rem;*/
+/*    row-gap: 0.5rem !important;*/
+/*}*/
+/*!* Grid Layout Row *!*/
+/*.row {*/
+/*    row-gap: 1rem !important;*/
+/*}*/
+
+/*!* Utilities *!*/
+/*.shadow-sm {*/
+/*    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);*/
+/*}*/
+
+/*.form-select {*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.badge {*/
+/*    font-size: 0.8rem;*/
+/*}*/
+
+/*.card-img-top.d-flex {*/
+/*    width: 80px;*/
+/*    height: 80px;*/
+/*    margin: 5px auto;*/
+/*    border-radius: 4px;*/
+/*}*/
+
+
+/* Common form container styles */
+.auth-container, .profile-container {
+    width: 80%;
+    margin: 40px auto;
+    padding: 20px;
 }
 
-.bg-light1 {
-    background-color: #b0d8ff;
+/* Common form section styles */
+.form-section {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
 
-.bg-light2 {
-    background-color: #d2e9ff;
-}
-
-.bg-light3 {
-    background-color: #f4f9ff;
-}
-
-/* Navbar Styles */
-.navbar .nav-item {
-    margin: 0 0.5rem;
-}
-
-.navbar .dropdown-menu {
-    margin-top: 0.5rem;
-}
-
-
-
-
-
-
-/* Card Styles */
-.card {
-    transition: transform 0.2s ease;
-    height: auto;
-    width: 160px;  /* Set specific width */
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card-body {
-    padding: 0.5rem;  /* Even smaller padding */
-    flex: none;
-}
-
-/* Card Image */
-.card-img-top {
-    width: 80px;      /* Smaller image */
-    height: 80px;
-    object-fit: contain;
-    margin: 5px auto;
-    display: block;
-}
-
-
-/* Card Text */
-.card-title {
-    font-size: 0.85rem;
-    margin-bottom: 0.3rem;
-}
-
-.card-text {
-    font-size: 0.75rem;
-    margin-bottom: 0.3rem;
-}
-
-/* Make buttons smaller */
-.card .btn {
-    padding: 0.2rem 0.4rem;
-    font-size: 0.75rem;
-}
-
-/* Grid Layout */
-.col {
-    padding: 0.3rem;  /* Reduce padding between cards */
-    margin-bottom: 0.5rem;
-    display: flex;
-    justify-content: center;
-}
-
-.row {
-    margin: 0 -0.3rem;  /* Compensate for smaller col padding */
-    row-gap: 0.5rem !important;
-}
-
-/* Utilities */
-.shadow-sm {
-    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
-}
-
-.form-select {
-    cursor: pointer;
-}
-
-.badge {
-    font-size: 0.8rem;
-}
-
-/* Grid Layout */
-.row {
-    row-gap: 1rem !important;
-}
-
-.col {
-    margin-bottom: 1rem;
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.card-img-top.d-flex {
-    width: 80px;
-    height: 80px;
-    margin: 5px auto;
-    border-radius: 4px;
+/* Common form error styles */
+.form_input_error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
 }

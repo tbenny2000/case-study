@@ -1,136 +1,143 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../include/header.jsp"/>
+<head>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <jsp:include page="../include/header.jsp"/>
+    <link href="/pub/css/product.css" rel="stylesheet">
+</head>
 
-<section class="bg-light2 pt-5 pb-5">
-    <div class="container">
-        <h1 class="text-center">${empty form.id ? 'Create' : 'Edit'} User</h1>
+<div class="create-container">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-section">
+                <h2 class="text-center mb-4">${empty form.id ? 'Create' : 'Edit'} User</h2>
 
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
                 <form action="/user/createUser" method="POST">
-                    <!-- Add this line for debugging -->
-                    <p>Editing User ID: ${form.id}</
                     <input type="hidden" name="id" value="${form.id}"/>
 
-                <!-- First Name -->
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="firstName" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="firstName" name="firstName" value="${form.firstName}">
-                        <c:if test="${bindingResult.hasFieldErrors('firstName')}">
-                            <div class="text-danger">
-                                <c:forEach items="${bindingResult.getFieldErrors('firstName')}" var="error">
-                                    ${error.defaultMessage}
-                                </c:forEach>
+                    <!-- Personal Information -->
+                    <div class="mb-4">
+                        <h4 class="mb-3">Personal Information</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control form-control-lg" id="firstName" name="firstName" value="${form.firstName}">
+                                <c:if test="${bindingResult.hasFieldErrors('firstName')}">
+                                    <div class="text-danger">
+                                        <c:forEach items="${bindingResult.getFieldErrors('firstName')}" var="error">
+                                            ${error.defaultMessage}
+                                        </c:forEach>
+                                    </div>
+                                </c:if>
                             </div>
-                        </c:if>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control form-control-lg" id="lastName" name="lastName" value="${form.lastName}">
+                                <c:if test="${bindingResult.hasFieldErrors('lastName')}">
+                                    <div class="text-danger">
+                                        <c:forEach items="${bindingResult.getFieldErrors('lastName')}" var="error">
+                                            ${error.defaultMessage}
+                                        </c:forEach>
+                                    </div>
+                                </c:if>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control form-control-lg" id="email" name="email" value="${form.email}">
+                                <c:if test="${bindingResult.hasFieldErrors('email')}">
+                                    <div class="text-danger">
+                                        <c:forEach items="${bindingResult.getFieldErrors('email')}" var="error">
+                                            ${error.defaultMessage}
+                                        </c:forEach>
+                                    </div>
+                                </c:if>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="text" class="form-control form-control-lg" id="phone" name="phone" value="${form.phone}">
+                                <c:if test="${bindingResult.hasFieldErrors('phone')}">
+                                    <div class="text-danger">
+                                        <c:forEach items="${bindingResult.getFieldErrors('phone')}" var="error">
+                                            ${error.defaultMessage}
+                                        </c:forEach>
+                                    </div>
+                                </c:if>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Last Name -->
-                    <div class="col-md-6">
-                        <label for="lastName" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" name="lastName" value="${form.lastName}">
-                        <c:if test="${bindingResult.hasFieldErrors('lastName')}">
-                            <div class="text-danger">
-                                <c:forEach items="${bindingResult.getFieldErrors('lastName')}" var="error">
-                                    ${error.defaultMessage}
-                                </c:forEach>
-                            </div>
-                        </c:if>
-                    </div>
-                </div>
+                    <!-- Address Information -->
+                    <div class="mb-4">
+                        <h4 class="mb-3">Address Information</h4>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control form-control-lg" id="address" name="address" value="${form.address}">
+                            <c:if test="${bindingResult.hasFieldErrors('address')}">
+                                <div class="text-danger">
+                                    <c:forEach items="${bindingResult.getFieldErrors('address')}" var="error">
+                                        ${error.defaultMessage}
+                                    </c:forEach>
+                                </div>
+                            </c:if>
+                        </div>
 
-                <!-- Email -->
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="${form.email}">
-                        <c:if test="${bindingResult.hasFieldErrors('email')}">
-                            <div class="text-danger">
-                                <c:forEach items="${bindingResult.getFieldErrors('email')}" var="error">
-                                    ${error.defaultMessage}
-                                </c:forEach>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="city" class="form-label">City</label>
+                                <input type="text" class="form-control form-control-lg" id="city" name="city" value="${form.city}">
                             </div>
-                        </c:if>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="state" class="form-label">State</label>
+                                <input type="text" class="form-control form-control-lg" id="state" name="state" value="${form.state}">
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="zip" class="form-label">ZIP Code</label>
+                                <input type="text" class="form-control form-control-lg" id="zip" name="zip" value="${form.zip}">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" class="form-control form-control-lg" id="country" name="country" value="${form.country}">
+                        </div>
                     </div>
 
-                    <!-- Phone -->
-                    <div class="col-md-6">
-                        <label for="phone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" value="${form.phone}">
-                        <c:if test="${bindingResult.hasFieldErrors('phone')}">
-                            <div class="text-danger">
-                                <c:forEach items="${bindingResult.getFieldErrors('phone')}" var="error">
-                                    ${error.defaultMessage}
-                                </c:forEach>
+                    <!-- Password Section (only for new users) -->
+                    <c:if test="${empty form.id}">
+                        <div class="mb-4">
+                            <h4 class="mb-3">Security</h4>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control form-control-lg" id="password" name="password">
+                                    <c:if test="${bindingResult.hasFieldErrors('password')}">
+                                        <div class="text-danger">
+                                            <c:forEach items="${bindingResult.getFieldErrors('password')}" var="error">
+                                                ${error.defaultMessage}
+                                            </c:forEach>
+                                        </div>
+                                    </c:if>
+                                </div>
                             </div>
-                        </c:if>
-                    </div>
-                </div>
-
-                <!-- Address -->
-                <div class="mb-3">
-                    <label for="address" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" value="${form.address}">
-                    <c:if test="${bindingResult.hasFieldErrors('address')}">
-                        <div class="text-danger">
-                            <c:forEach items="${bindingResult.getFieldErrors('address')}" var="error">
-                                ${error.defaultMessage}
-                            </c:forEach>
                         </div>
                     </c:if>
-                </div>
 
-                <!-- City -->
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="city" class="form-label">City</label>
-                        <input type="text" class="form-control" id="city" name="city" value="${form.city}">
+                    <!-- Submit Buttons -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+                            <a href="/user/search" class="btn btn-secondary btn-lg ms-2">Cancel</a>
+                        </div>
                     </div>
-
-                    <!-- State -->
-                    <div class="col-md-4">
-                        <label for="state" class="form-label">State</label>
-                        <input type="text" class="form-control" id="state" name="state" value="${form.state}">
-                    </div>
-
-                    <!-- Zip -->
-                    <div class="col-md-4">
-                        <label for="zip" class="form-label">ZIP Code</label>
-                        <input type="text" class="form-control" id="zip" name="zip" value="${form.zip}">
-                    </div>
-                </div>
-
-                <!-- Country -->
-                <div class="mb-3">
-                    <label for="country" class="form-label">Country</label>
-                    <input type="text" class="form-control" id="country" name="country" value="${form.country}">
-                </div>
-
-                <!-- Password (only shown for new users) -->
-                <c:if test="${empty form.id}">
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                        <c:if test="${bindingResult.hasFieldErrors('password')}">
-                            <div class="text-danger">
-                                <c:forEach items="${bindingResult.getFieldErrors('password')}" var="error">
-                                    ${error.defaultMessage}
-                                </c:forEach>
-                            </div>
-                        </c:if>
-                    </div>
-                </c:if>
-
-                <!-- Buttons -->
-                <div class="mt-4">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a href="/user/search" class="btn btn-secondary ms-2">Cancel</a>
-                </div>
                 </form>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<%--<jsp:include page="../include/footer.jsp"/>--%>
+<jsp:include page="../include/footer.jsp"/>

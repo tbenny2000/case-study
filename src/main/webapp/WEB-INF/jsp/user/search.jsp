@@ -23,9 +23,6 @@
             </div>
 
             <!-- ============= SEARCH BUTTON FOR USER ============== -->
-
-
-
             <div class="row justify-content-center">
                 <div class="col-6">
                     <button type="submit" class="btn btn-primary">Search</button>

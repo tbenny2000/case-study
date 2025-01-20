@@ -18,10 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 //@Slf4j
 @Controller
 public class ProductController {
@@ -38,6 +36,21 @@ public class ProductController {
     public ModelAndView createProduct(@RequestParam(required = false) Integer id) {
         ModelAndView response = new ModelAndView("product/create");
 
+        // Add list of categories
+        List<String> categories = Arrays.asList(
+                "Balls",
+                "Cleats",
+                "Jerseys",
+                "Shin Guards",
+                "Goalkeeper Gear",
+                "Training Equipment",
+                "Accessories",
+                "Team Uniforms",
+                "Bags",
+                "Protective Gear"
+        );
+        response.addObject("categories", categories);
+
         if (id != null) {
             Product product = productDAO.findById(id)
                     .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
@@ -49,7 +62,7 @@ public class ProductController {
             form.setPrice(product.getPrice());
             form.setImageUrl(product.getImageUrl());
             form.setCategory(product.getCategory());
-            form.setStockQuantity(product.getStockQuantity());  // Now the types match
+            form.setStockQuantity(product.getStockQuantity());
 
             response.addObject("form", form);
         }
@@ -163,5 +176,4 @@ public class ProductController {
         response.addObject("form", form);
         return response;
     }
-
 }
