@@ -1,14 +1,13 @@
 package com.soccerstore.webapp.validation;
 
-
 import com.soccerstore.webapp.database.dao.UserDAO;
 import com.soccerstore.webapp.database.entity.User;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 
 
 public class EmailUniqueImpl implements ConstraintValidator<EmailUnique, String> {

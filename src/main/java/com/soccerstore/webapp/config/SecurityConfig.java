@@ -1,10 +1,12 @@
 package com.soccerstore.webapp.config;
 
+import com.soccerstore.webapp.security.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,29 +16,34 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity  // Changed from @EnableGlobalMethodSecurity
 public class SecurityConfig {
-    // authentication - the act of checking the users credentials .. meaning is the username and password correct
-    // authorization - is what the user can do
-    // principal - this is the user logged in
+
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-        http.csrf(csrf -> csrf.disable());
-
         http.authorizeHttpRequests((authorize) -> authorize
-                // Require authentication for /customer/** endpoints
-                .requestMatchers("/customer/**").authenticated()
-                .requestMatchers("/employee/**").authenticated()
-
-                // Allow all other requests without authentication
-                .anyRequest().permitAll()
+                .requestMatchers(
+                        "/",
+                        "/pub/**",
+                        "/index",
+                        "/login",
+                        "/login/signup",
+                        "/login/login").permitAll()
+                .requestMatchers("/user/**").hasAnyAuthority("ADMIN", "USER")
+                .anyRequest().authenticated()
         );
 
-        http.formLogin(formLogin -> formLogin
-                .loginPage("/login/login")
-                .loginProcessingUrl("/login/loginSubmit"));
+        http.userDetailsService(userDetailsService);
 
+        http.formLogin(formLogin -> formLogin
+//                .loginPage("/login/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login/login?error=true")
+                .permitAll());
 
         http.logout(formLogout -> formLogout
                 .invalidateHttpSession(true)
@@ -44,10 +51,13 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/")
                 .deleteCookies("username", "JSESSIONID"));
 
-        // only if the user goes to a page that they do not have authoziation for then it goes to this page
-        // instead of showing a whitelabel error page
-        http.exceptionHandling(exception -> exception
-                .accessDeniedPage("/404"));
+        http.headers(headers ->
+                headers.frameOptions(frameOptions ->
+                        frameOptions.sameOrigin()
+                )
+        );
+
+        http.csrf(csrf -> csrf.disable());
 
         return http.build();
     }

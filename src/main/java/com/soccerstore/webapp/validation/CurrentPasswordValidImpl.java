@@ -4,11 +4,11 @@ import com.soccerstore.webapp.database.entity.User;
 import com.soccerstore.webapp.security.AuthenticatedUserService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.util.StringUtils;
 
 
 public class CurrentPasswordValidImpl implements ConstraintValidator<CurrentPasswordValid, String> {

@@ -53,4 +53,5 @@ public class TwoFieldsAreEqualImpl implements ConstraintValidator<TwoFieldsAreEq
 
         return false;
     }
+
 }

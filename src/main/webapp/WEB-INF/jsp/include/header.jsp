@@ -5,83 +5,109 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Soccer Store</title>
 
-    <!-- these 2 lines are needed to bring in bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- jquery is always loaded at the top of the file because its needed by so many other libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Optional: Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
+    <!-- Custom CSS -->
+    <link href="/pub/css/global.css" rel="stylesheet">
 
-    <link href="/pub/css/global.css" rel="stylesheet"/>
+    <!-- Bootstrap JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<section>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/index">Index</a>
-                        </li>
-
-                    <%--============= CUSTOMER SEARCH FUNCTION ================= --%>
-                    <sec:authorize access="hasAuthority('CUSTOMER')">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/customer/search">Customer Search</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/customer/create">Create Customer</a>
-                        </li>
-                    </sec:authorize>
-
-                    <%--============= LOGIN SIGNUP PAGE ================= --%>
-                    <sec:authorize access="!isAuthenticated()">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login/login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login/signup">Signup</a>
-                        </li>
-                    </sec:authorize>
-
-                    <%--============= LOGOUT PAGE ================= --%>
-                    <sec:authorize access="isAuthenticated()">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login/logout">Logout</a>
-                        </li>
-                        <li class="nav-item">
-                            <span class="nav-link">
-                                <sec:authentication property="principal.username"/>
-                            </span>
-                        </li>
-                    </sec:authorize>
-
-                    <%--============= ADMING PAGE ================= --%>
-                    <sec:authorize access="hasAnyAuthority('ADMIN')">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Admin Only</a>
-                        </li>
-                    </sec:authorize>
 
 
-<%--                    <li class="nav-item">--%>
-<%--                        <a class="nav-link" href="/customer/search">Customer Search</a>--%>
-<%--                    </li>--%>
-<%--                    <li class="nav-item">--%>
-<%--                        <a class="nav-link" href="/customer/create">Create Customer</a>--%>
-<%--                    </li>--%>
-                </ul>
-            </div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand me-4" href="/">Soccer Store</a>
+
+        <!-- Mobile toggle button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left-aligned main menu items -->
+            <ul class="navbar-nav me-auto d-flex align-items-center">
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+
+                <!-- Products -->
+                <sec:authorize access="hasAnyAuthority('USER')">
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Products
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/product/search">Search Products</a></li>
+                            <li><a class="dropdown-item" href="/product/create">Create Product</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Users -->
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Users
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/user/createUser">Create User</a></li>
+                            <li><a class="dropdown-item" href="/user/search">Search Users</a></li>
+                        </ul>
+                    </li>
+                </sec:authorize>
+
+
+                <!-- Admin -->
+                <sec:authorize access="hasAnyAuthority('ADMIN')">
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Admin
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/admin/dashboard">Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/admin/users">Manage Users</a></li>
+                            <li><a class="dropdown-item" href="/admin/products">Manage Products</a></li>
+                        </ul>
+                    </li>
+                </sec:authorize>
+            </ul>
+
+            <!-- Right-aligned auth items -->
+            <ul class="navbar-nav ms-auto d-flex align-items-center">
+                <sec:authorize access="!isAuthenticated()">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/login/login">Login</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/login/signup">Sign Up</a>
+                    </li>
+                </sec:authorize>
+
+                <sec:authorize access="isAuthenticated()">
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <sec:authentication property="principal.username"/>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/user/profile">My Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="/login/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </sec:authorize>
+            </ul>
         </div>
-    </nav>
-</section>
+    </div>
+</nav>
+

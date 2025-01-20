@@ -13,12 +13,15 @@
 <section class="bg-light2 pt-5 pb-5">
   <div class="container">
     <form action="/login/signupSubmit" method="post">
+
+      <!-- =========== USERNAME FOR SIGNING UP ================= -->
       <div class="mt-3 row justify-content-center">
         <label for="username" class="col-sm-2 col-form-label">Username</label>
         <div class="col-sm-10 col-lg-6">
           <input type="text" class="form-control" id="username" name="username" value="">
         </div>
       </div>
+
       <c:if test="${bindingResult.hasFieldErrors('username')}">
         <div class="row justify-content-center">
           <div class="col-sm-2"></div>
@@ -30,6 +33,7 @@
         </div>
       </c:if>
 
+      <!-- =========== PASSWORD FOR SIGNING UP ================= -->
       <div class="mt-3 row justify-content-center">
         <label for="password" class="col-sm-2 col-form-label">Password</label>
         <div class="col-sm-10 col-lg-6">
@@ -47,7 +51,7 @@
         </div>
       </c:if>
 
-
+      <!-- =========== FIRST NAME FOR SIGNING UP ================= -->
       <div class="mt-3 row justify-content-center">
         <label for="fullname" class="col-sm-2 col-form-label">Full Name</label>
         <div class="col-sm-10 col-lg-6">
@@ -65,6 +69,7 @@
         </div>
       </c:if>
 
+      <!-- =========== SUBMITTING FOR SIGNING UP ================= -->
       <div class="mt-3 row justify-content-center">
         <div class="col-sm-12 col-lg-8">
           <button type="submit" class="btn btn-primary">Submit</button>
@@ -74,5 +79,4 @@
   </div>
 </section>
 
-
-<jsp:include page="../include/footer.jsp"/>
+<%--<jsp:include page="../include/footer.jsp" />--%>

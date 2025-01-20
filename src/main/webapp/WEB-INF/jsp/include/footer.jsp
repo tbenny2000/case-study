@@ -1,15 +1,15 @@
-
-<section class="bg-footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <p class="para" style="text-align: center">2025 Ben's website. All rights reserved.</p>
-            </div>
-        </div>
-    </div>
-
-</section>
+<%--<link rel="stylesheet" href="/pub/css/signup.css">--%>
 
 
-</body>
-</html>
+<%--<div class="footer-bottom">--%>
+<%--    <p>&copy; 2025 Beniamin Tacota. All rights reserved.</p>--%>
+<%--    <div class="footer-language">--%>
+<%--        <span>English</span>--%>
+<%--        <span>|</span>--%>
+<%--        <span>United States</span>--%>
+<%--    </div>--%>
+<%--</div>--%>
+
+
+<%--</body>--%>
+<%--</html>--%>

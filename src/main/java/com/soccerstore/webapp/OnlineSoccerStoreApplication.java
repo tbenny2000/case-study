@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OnlineSoccerStoreApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(OnlineSoccerStoreApplication.class, args);
 	}
 

@@ -17,17 +17,17 @@ public class User {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "password")
-    private String password;
+    @Column(name="first_name")
+    private String firstName;
 
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name="first_name")
-    private String firstName;
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name="address")
     private String address;
@@ -44,4 +44,9 @@ public class User {
     @Column(name="phone")
     private String phone;
 
+    @Column(name="country")
+    private String country;
+
+    @Column(name="image_url")
+    private String imageUrl;
 }

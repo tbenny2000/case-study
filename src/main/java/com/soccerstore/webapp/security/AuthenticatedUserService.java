@@ -22,7 +22,7 @@ import java.util.Collection;
 public class AuthenticatedUserService {
 
     @Autowired
-    private UserDAO userDAO;
+    private UserDAO userDao;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -45,10 +45,13 @@ public class AuthenticatedUserService {
         }
     }
 
+    // This will be used by almost everyone in the project to get the user_id for the loged in user
+    // you can simplty autowire in the authenticated user service and call this function simialr to DAO call
+    // this function returns null if the user is not looged in and will return a User entity if they are
     public User loadCurrentUser() {
         String username = getCurrentUsername();
         if (username != null) {
-            return userDAO.findByEmailIgnoreCase(username);
+            return userDao.findByEmailIgnoreCase(username);
         }
         return null;
     }
@@ -63,7 +66,7 @@ public class AuthenticatedUserService {
         session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
     }
 
-    // you may not have a use for this in your project, but it is nice to have in this class for feature
+    // you may not have a use for this in your project but it is nice to have in this class for feature
     // completeness .. maybe some day
     public boolean isUserInRole(String role) {
         SecurityContext context = SecurityContextHolder.getContext();
@@ -88,4 +91,5 @@ public class AuthenticatedUserService {
 
         return (authentication != null && authentication.isAuthenticated());
     }
+
 }

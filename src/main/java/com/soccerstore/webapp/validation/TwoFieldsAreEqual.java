@@ -1,6 +1,5 @@
 package com.soccerstore.webapp.validation;
 
-
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
