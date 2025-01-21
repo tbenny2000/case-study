@@ -34,15 +34,12 @@ Browse through our extensive collection of soccer products with an intuitive sea
 
 ### Shopping Cart
 Easily manage your selected items with our responsive shopping cart interface.
-![Shopping Cart](https://github.com/[username]/[reponame]/blob/[branch]/shopping-cart.jpg?raw=true)
+![Shopping Cart](https://github.com/tbenny2000/case-study/blob/main/CheckoutCart.jpg?raw=true))
 
 ### User Profile
 Manage your account details and view order/s history in the user profile section.
 ![User Profile](https://github.com/tbenny2000/case-study/blob/main/UserProfile.jpg?raw=true))
 
-### Admin Dashboard
-Administrators can manage products, users, and orders through a comprehensive dashboard.
-![Admin Dashboard](https://github.com/[username]/[reponame]/blob/[branch]/admin-dashboard.jpg?raw=true)
 
 ## Features
 
