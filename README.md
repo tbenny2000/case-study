@@ -59,4 +59,4 @@ Administrators can manage products, users, and orders through a comprehensive da
 
 1. Clone the repository
 ```bash
-git clone [https://github.com/[username]/[reponame]](https://github.com/tbenny2000/case-study).git
+git clone (https://github.com/tbenny2000/case-study.git)
