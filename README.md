@@ -24,7 +24,7 @@ The Soccer Store is a comprehensive e-commerce platform designed for soccer enth
 - Bootstrap Icons
 
 ## Database Schema
-![Database Schema](https://github.com/[username]/[reponame]/blob/[branch]/database-schema.jpg?raw=true)
+![Database Schema](https://github.com/tbenny2000/case-study/blob/main/FinalERDiagram.jpg?raw=true)
 
 ## Application Screenshots
 
