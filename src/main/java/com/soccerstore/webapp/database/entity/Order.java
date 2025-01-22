@@ -1,8 +1,13 @@
 package com.soccerstore.webapp.database.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.time.ZoneId;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,15 +22,19 @@ public class Order {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
 
-        @Column(name = "users_id")
-        private Integer userId;
-
         @Column(name = "order_status")
         private String orderStatus;
 
-        @Column(name = "order_date", columnDefinition = "datetime(6)")
+        @Column(name = "order_date", columnDefinition = "DATETIME(6)")
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime orderDate;
 
         @Column(name = "comments")
         private String comments;
+
+        @ManyToOne
+        @JoinColumn(name = "users_id", nullable = false)
+        @ToString.Exclude
+        private User user;
 }
+

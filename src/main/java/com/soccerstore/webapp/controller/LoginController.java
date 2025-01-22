@@ -34,15 +34,12 @@ public class LoginController {
     private AuthenticatedUserService authenticatedUserService;
 
     //============= LOGIN PAGE =======================
-    //this get mpapping is called by spring security when a secure resource is requested
-    //needs to match the spring securtiy configuration  .loginPage method
     @GetMapping("/login/login")
     public ModelAndView theLoginPage() {
         ModelAndView response = new ModelAndView();
         response.setViewName("login/loginPage");
         return response;
     }
-
 
     // ================== SIGN UP PAGE ====================
     @GetMapping("/login/signup")
@@ -59,33 +56,36 @@ public class LoginController {
     public ModelAndView signupSubmit(@Valid SignupFormBean form, BindingResult bindingResult, HttpSession session) {
         ModelAndView response = new ModelAndView();
 
-        if ( bindingResult.hasErrors() ) {
+        if (bindingResult.hasErrors()) {
             response.setViewName("login/signup");
             response.addObject("bindingResult", bindingResult);
             response.addObject("form", form);
 
         } else {
+            // Create a new User object
             User user = new User();
-
             user.setEmail(form.getUsername());
             user.setFirstName(form.getFullname());
+
+            // Encrypt the password and set it
             String encryptedPassword = passwordEncoder.encode(form.getPassword());
             user.setPassword(encryptedPassword);
 
+            // Save the user
             userDAO.save(user);
 
             // Create and save the user role
             UserRole userRole = new UserRole();
-            userRole.setUserId(user.getId());
-            userRole.setRoleName("USER");  // This must match exactly what you're checking in the JSP
+            userRole.setUser(user);  // Associate the user object with the user role
+            userRole.setRoleName("USER"); // Set the role name
             userRoleDAO.save(userRole);
 
-            // since this is a new user we can manually authenticate them for the first time
-            authenticatedUserService.changeLoggedInUsername(session,form.getUsername(),form.getPassword());
+            // Manually authenticate the new user
+            authenticatedUserService.changeLoggedInUsername(session, form.getUsername(), form.getPassword());
 
             response.setViewName("redirect:/");
         }
-
         return response;
     }
+
 }

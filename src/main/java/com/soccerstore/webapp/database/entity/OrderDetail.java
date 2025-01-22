@@ -11,6 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @Table(name = "orderdetails")
 public class OrderDetail {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -21,9 +22,16 @@ public class OrderDetail {
     @Column(name = "price", columnDefinition = "decimal(10,2)")
     private Double price;
 
-    @Column(name = "products_id")
-    private Integer productId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "products_id", nullable = false)
+    private Product product;
 
-    @Column(name = "orders_id")
-    private Integer ordersId;
+
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "orders_id", nullable = false)
+    private Order order;
+
+
 }
+

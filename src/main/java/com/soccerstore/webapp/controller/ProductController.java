@@ -4,11 +4,14 @@ import com.soccerstore.webapp.database.dao.ProductDAO;
 import com.soccerstore.webapp.database.entity.Product;
 import com.soccerstore.webapp.form.CreateProductFormBean;
 import com.soccerstore.webapp.security.FileUploadUtil;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.IOException;
 import java.util.*;
 
-//@Slf4j
 @Controller
 public class ProductController {
 
@@ -88,8 +90,16 @@ public class ProductController {
                 form.setImageUrl(imageUrl);
             }
 
-            // Create and save product
-            Product product = new Product();
+            // Check if the product exists for an update
+            Product product;
+            if (form.getId() != null) {
+                product = productDAO.findById(form.getId())
+                        .orElseThrow(() -> new RuntimeException("Product not found with id: " + form.getId()));
+            } else {
+                product = new Product(); // Create a new product if no ID is provided
+            }
+
+            // Update or set product details
             product.setName(form.getName());
             product.setDescription(form.getDescription());
             product.setPrice(form.getPrice());
@@ -97,6 +107,7 @@ public class ProductController {
             product.setStockQuantity(form.getStockQuantity());
             product.setImageUrl(form.getImageUrl());
 
+            // Save the product
             productDAO.save(product);
 
             response.setViewName("redirect:/product/search");
@@ -106,6 +117,42 @@ public class ProductController {
             response.setViewName("product/create");
             response.addObject("form", form);
             response.addObject("errorMessage", "Failed to upload image: " + e.getMessage());
+        }
+
+        return response;
+    }
+
+    // ============= DELETE PRODUCT ================
+//    @GetMapping("/product/delete/{id}")
+//    public ModelAndView deleteProduct(@PathVariable Integer id) {
+//        ModelAndView response = new ModelAndView("redirect:/product/search");
+//
+//        // Find the product by ID
+//        Optional<Product> productOptional = productDAO.findById(id);
+//        if (productOptional.isPresent()) {
+//            // Delete the product
+//            productDAO.delete(productOptional.get());
+//        } else {
+//            // Optionally add an error message if the product is not found
+//            response.addObject("errorMessage", "Product not found with ID: " + id);
+//        }
+//
+//        return response;
+//    }
+
+    @GetMapping("/product/delete/{id}")
+    public ModelAndView deleteProduct(@PathVariable Integer id) {
+        ModelAndView response = new ModelAndView("redirect:/product/search");
+
+        // Find the product by ID
+        Product product = productDAO.findProductById(id);
+
+        if (product != null) {
+            // Delete the product
+            productDAO.delete(product);
+        } else {
+            // Add error message if product not found
+            response.addObject("errorMessage", "Product not found with ID: " + id);
         }
 
         return response;
@@ -155,10 +202,24 @@ public class ProductController {
     public ModelAndView editProduct(@PathVariable Integer id) {
         ModelAndView response = new ModelAndView("product/create");
 
+        // Add list of categories
+        List<String> categories = Arrays.asList(
+                "Balls",
+                "Cleats",
+                "Jerseys",
+                "Shin Guards",
+                "Goalkeeper Gear",
+                "Training Equipment",
+                "Accessories",
+                "Team Uniforms",
+                "Bags",
+                "Protective Gear"
+        );
+        response.addObject("categories", categories);
+
         // Using Optional
         Optional<Product> productOptional = productDAO.findById(id);
         if (productOptional.isEmpty()) {
-            //log.debug("Product not found with ID: " + id);
             response.setViewName("redirect:/product/search");
             return response;
         }
@@ -176,4 +237,5 @@ public class ProductController {
         response.addObject("form", form);
         return response;
     }
+
 }

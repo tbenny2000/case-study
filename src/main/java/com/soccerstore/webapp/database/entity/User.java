@@ -1,6 +1,8 @@
 package com.soccerstore.webapp.database.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,39 +16,43 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
 
-    @Column(name="first_name")
+    @NotBlank(message = "First name is required")
+    @Column(name = "first_name")
     private String firstName;
 
+    @NotBlank(message = "Last name is required")
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email")
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email should be valid")
+    @Column(name = "email", unique = true)
     private String email;
 
+    @NotBlank(message = "Password is required")
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name="address")
+    @Column(name = "address")
     private String address;
 
-    @Column(name="city")
+    @Column(name = "city")
     private String city;
 
-    @Column(name="state")
+    @Column(name = "state")
     private String state;
 
-    @Column(name="zip")
+    @Column(name = "zip")
     private String zip;
 
-    @Column(name="phone")
+    @Column(name = "phone")
     private String phone;
 
-    @Column(name="country")
+    @Column(name = "country")
     private String country;
 
-    @Column(name="image_url")
+    @Column(name = "image_url")
     private String imageUrl;
 }

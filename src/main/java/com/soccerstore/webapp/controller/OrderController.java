@@ -1,112 +1,6 @@
-//package com.soccerstore.webapp.controller;
-//
-//import com.soccerstore.webapp.database.dao.CartItemDTO;
-//import com.soccerstore.webapp.database.dao.OrderDAO;
-//import com.soccerstore.webapp.database.dao.OrderDetailDAO;
-//import com.soccerstore.webapp.database.dao.ProductDAO;
-//import com.soccerstore.webapp.database.entity.Order;
-//import com.soccerstore.webapp.database.entity.OrderDetail;
-//import com.soccerstore.webapp.database.entity.Product;
-//import com.soccerstore.webapp.database.entity.User;
-//import com.soccerstore.webapp.security.AuthenticatedUserService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.servlet.ModelAndView;
-//
-//import java.util.ArrayList;
-//import java.util.Date;
-//import java.util.List;
-//
-//@Controller
-//public class OrderController {
-//
-//    @Autowired
-//    private OrderDAO orderDAO;
-//
-//    @Autowired
-//    private OrderDetailDAO orderDetailDAO;
-//
-//    @Autowired
-//    private ProductDAO productDAO;
-//
-//    @Autowired
-//    private AuthenticatedUserService authenticatedUserService;
-//
-//    @GetMapping("/order/addToCart")
-//    public ModelAndView addToCart(@RequestParam Integer id) {
-//        User user = authenticatedUserService.loadCurrentUser();
-//        if (user == null) {
-//            return new ModelAndView("redirect:/login/login");
-//        }
-//
-//        // Find existing cart or create new one
-//        Order cart = orderDAO.findByUserIdAndOrderStatus(user.getId(), "CART");
-//        if (cart == null) {
-//            cart = new Order();
-//            cart.setUserId(user.getId());
-//            cart.setOrderStatus("CART");
-//            cart.setOrderDate(new Date());
-//            cart = orderDAO.save(cart);
-//        }
-//
-//        // Get product
-//        Product product = productDAO.findProductById(id);
-//        if (product == null) {
-//            return new ModelAndView("redirect:/product/search");
-//        }
-//
-//        // Add to cart
-//        OrderDetail detail = new OrderDetail();
-//        detail.setOrderId(cart.getId());
-//        detail.setProductId(product.getId());
-//        detail.setQuantity(1);
-//        detail.setPrice(product.getPrice());
-//        orderDetailDAO.save(detail);
-//
-//        return new ModelAndView("redirect:/order/cart");
-//    }
-//
-//    @GetMapping("/order/cart")
-//    public ModelAndView viewCart() {
-//        ModelAndView response = new ModelAndView("order/cart");
-//
-//        User user = authenticatedUserService.loadCurrentUser();
-//        if (user == null) {
-//            return new ModelAndView("redirect:/login/login");
-//        }
-//
-//        Order cart = orderDAO.findByUserIdAndOrderStatus(user.getId(), "CART");
-//        if (cart != null) {
-//            List<OrderDetail> details = orderDetailDAO.findByOrdersId(cart.getId());
-//            List<CartItemDTO> cartItems = new ArrayList<>();
-//
-//            for (OrderDetail detail : details) {
-//                Product product = productDAO.findProductById(detail.getProductId());
-//                CartItemDTO item = new CartItemDTO();
-//                item.setProduct(product);
-//                item.setQuantity(detail.getQuantity());
-//                item.setPrice(detail.getPrice());
-//                cartItems.add(item);
-//            }
-//
-//            response.addObject("cartItems", cartItems);
-//        }
-//
-//        return response;
-//    }
-//}
-
-
-
-
 package com.soccerstore.webapp.controller;
 
-import com.soccerstore.webapp.database.dao.CartItemDTO;
-import com.soccerstore.webapp.database.dao.OrderDAO;
-import com.soccerstore.webapp.database.dao.OrderDetailDAO;
-import com.soccerstore.webapp.database.dao.ProductDAO;
+import com.soccerstore.webapp.database.dao.*;
 import com.soccerstore.webapp.database.entity.Order;
 import com.soccerstore.webapp.database.entity.OrderDetail;
 import com.soccerstore.webapp.database.entity.Product;
@@ -114,6 +8,7 @@ import com.soccerstore.webapp.database.entity.User;
 import com.soccerstore.webapp.security.AuthenticatedUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -122,13 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Controller
 public class OrderController {
-
-    Logger log = LoggerFactory.getLogger(OrderController.class);
+    private final Logger log = LoggerFactory.getLogger(OrderController.class);
 
     @Autowired
     private OrderDAO orderDAO;
@@ -142,7 +36,7 @@ public class OrderController {
     @Autowired
     private AuthenticatedUserService authenticatedUserService;
 
-    // ========== ADDING TO CART ==============
+    // ========== ADDING PRODUCTS TO CART ==============
     @GetMapping("/order/addToCart")
     public ModelAndView addToCart(@RequestParam Integer id) {
         User user = authenticatedUserService.loadCurrentUser();
@@ -150,14 +44,14 @@ public class OrderController {
             return new ModelAndView("redirect:/login/login");
         }
 
-        // Find existing cart or create new one
+        // Find existing cart or create a new one
         Order cart = orderDAO.findByUserIdAndOrderStatus(user.getId(), "CART");
         if (cart == null) {
             cart = new Order();
-            cart.setUserId(user.getId());
+            cart.setUser(user); // Associate the User object directly
             cart.setOrderStatus("CART");
             cart.setOrderDate(LocalDateTime.now());
-            cart = orderDAO.save(cart);
+            orderDAO.save(cart);
         }
 
         // Get product
@@ -168,8 +62,8 @@ public class OrderController {
 
         // Add to cart
         OrderDetail detail = new OrderDetail();
-        detail.setOrdersId(cart.getId());
-        detail.setProductId(product.getId());
+        detail.setOrder(cart); // Link the cart directly
+        detail.setProduct(product); // Link the product directly
         detail.setQuantity(1);
         detail.setPrice(product.getPrice());
         orderDetailDAO.save(detail);
@@ -189,13 +83,12 @@ public class OrderController {
 
         Order cart = orderDAO.findByUserIdAndOrderStatus(user.getId(), "CART");
         if (cart != null) {
-            List<OrderDetail> details = orderDetailDAO.findByOrdersId(cart.getId());
+            List<OrderDetail> details = orderDetailDAO.findByOrder(cart);
             List<CartItemDTO> cartItems = new ArrayList<>();
 
             for (OrderDetail detail : details) {
-                Product product = productDAO.findProductById(detail.getProductId());
                 CartItemDTO item = new CartItemDTO();
-                item.setProduct(product);
+                item.setProduct(detail.getProduct());
                 item.setQuantity(detail.getQuantity());
                 item.setPrice(detail.getPrice());
                 cartItems.add(item);
@@ -203,7 +96,6 @@ public class OrderController {
 
             response.addObject("cartItems", cartItems);
         }
-
         return response;
     }
 
@@ -217,45 +109,57 @@ public class OrderController {
 
         Order cart = orderDAO.findByUserIdAndOrderStatus(user.getId(), "CART");
         if (cart != null) {
-            List<OrderDetail> details = orderDetailDAO.findByOrdersIdAndProductId(cart.getId(), id);
-            for (OrderDetail detail : details) {
+            OrderDetail detail = orderDetailDAO.findByOrderAndProductId(cart, id);
+            if (detail != null) {
                 orderDetailDAO.delete(detail);
             }
         }
-
         return new ModelAndView("redirect:/order/cart");
     }
 
     // ========== ORDER UPDATE CART ==============
     @PostMapping("/order/updateCart")
     public ModelAndView updateCart(@RequestParam Integer id, @RequestParam Integer quantity) {
-        log.info("updateCart: id={}, quantity={}", id, quantity);
+        log.debug("Received update request - ID: {}, Quantity: {}", id, quantity);
+
         User user = authenticatedUserService.loadCurrentUser();
         if (user == null) {
+            log.error("No user found in session");
             return new ModelAndView("redirect:/login/login");
         }
 
-        Order cart = orderDAO.findByUserIdAndOrderStatus(user.getId(), "CART");
-        if (cart != null) {
-            List<OrderDetail> details = orderDetailDAO.findByOrdersIdAndProductId(cart.getId(), id);
-            if (!details.isEmpty()) {
-                OrderDetail detail = details.get(0);
-                if (quantity == 0) {
-                    orderDetailDAO.delete(detail);
-                } else {
-                    detail.setQuantity(detail.getQuantity() + quantity);
-                    if (detail.getQuantity() <= 0) {
+        try {
+            Order cart = orderDAO.findByUserIdAndOrderStatus(user.getId(), "CART");
+            if (cart != null) {
+                OrderDetail detail = orderDetailDAO.findByOrderAndProductId(cart, id);
+                if (detail != null) {
+                    int newQuantity = detail.getQuantity() + quantity;
+                    log.debug("Current quantity: {}, New quantity will be: {}",
+                            detail.getQuantity(), newQuantity);
+
+                    if (newQuantity <= 0) {
+                        log.debug("Removing item from cart as quantity <= 0");
                         orderDetailDAO.delete(detail);
                     } else {
+                        detail.setQuantity(newQuantity);
                         orderDetailDAO.save(detail);
+                        log.debug("Updated quantity successfully");
                     }
+                } else {
+                    log.error("No OrderDetail found for product ID: {}", id);
                 }
+            } else {
+                log.error("No cart found for user ID: {}", user.getId());
             }
+        } catch (Exception e) {
+            log.error("Error updating cart", e);
+            throw e;  // Let Spring handle the error
         }
 
         return new ModelAndView("redirect:/order/cart");
     }
 
+    // =========== CHECKOUT ORDER ===============
     @GetMapping("/order/checkout")
     public ModelAndView showCheckout() {
         ModelAndView response = new ModelAndView("order/checkout");
@@ -265,21 +169,18 @@ public class OrderController {
             return new ModelAndView("redirect:/login/login");
         }
 
-        // Get current cart
         Order cart = orderDAO.findByUserIdAndOrderStatus(user.getId(), "CART");
         if (cart == null) {
             return new ModelAndView("redirect:/order/cart");
         }
 
-        // Get cart items and calculate total
-        List<OrderDetail> details = orderDetailDAO.findByOrdersId(cart.getId());
+        List<OrderDetail> details = orderDetailDAO.findByOrder(cart);
         double total = 0.0;
         List<CartItemDTO> cartItems = new ArrayList<>();
 
         for (OrderDetail detail : details) {
-            Product product = productDAO.findProductById(detail.getProductId());
             CartItemDTO item = new CartItemDTO();
-            item.setProduct(product);
+            item.setProduct(detail.getProduct());
             item.setQuantity(detail.getQuantity());
             item.setPrice(detail.getPrice());
             cartItems.add(item);
@@ -292,6 +193,7 @@ public class OrderController {
         return response;
     }
 
+    // =========== PLACING AN ORDER ===============
     @PostMapping("/order/placeOrder")
     public ModelAndView placeOrder(@RequestParam(required = false) String comments) {
         ModelAndView response = new ModelAndView("order/confirmation");
@@ -301,26 +203,21 @@ public class OrderController {
             return new ModelAndView("redirect:/login/login");
         }
 
-        // Get current cart
         Order cart = orderDAO.findByUserIdAndOrderStatus(user.getId(), "CART");
         if (cart != null) {
-            // Update order
             cart.setOrderStatus("PLACED");
             cart.setOrderDate(LocalDateTime.now());
             cart.setComments(comments);
 
-            // Save order
             orderDAO.save(cart);
 
-            // Get order details for confirmation
-            List<OrderDetail> details = orderDetailDAO.findByOrdersId(cart.getId());
+            List<OrderDetail> details = orderDetailDAO.findByOrder(cart);
             List<CartItemDTO> cartItems = new ArrayList<>();
             double total = 0.0;
 
             for (OrderDetail detail : details) {
-                Product product = productDAO.findProductById(detail.getProductId());
                 CartItemDTO item = new CartItemDTO();
-                item.setProduct(product);
+                item.setProduct(detail.getProduct());
                 item.setQuantity(detail.getQuantity());
                 item.setPrice(detail.getPrice());
                 cartItems.add(item);
@@ -331,7 +228,37 @@ public class OrderController {
             response.addObject("cartItems", cartItems);
             response.addObject("total", total);
         }
+        return response;
+    }
 
+    @GetMapping("/order/history")
+    public ModelAndView orderHistory() {
+        ModelAndView response = new ModelAndView("order/history");
+
+        User user = authenticatedUserService.loadCurrentUser();
+        if (user == null) {
+            return new ModelAndView("redirect:/login/login");
+        }
+
+        List<Order> orders = orderDAO.findByUserIdAndOrderStatusNot(user.getId(), "CART");
+        List<OrderHistoryDTO> orderHistory = new ArrayList<>();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm");
+
+        for (Order order : orders) {
+            OrderHistoryDTO historyItem = new OrderHistoryDTO();
+            historyItem.setOrder(order);
+            historyItem.setDetails(orderDetailDAO.findByOrder(order));
+            // Format the date here
+            if (order.getOrderDate() != null) {
+                historyItem.setFormattedDate(order.getOrderDate().format(formatter));
+            } else {
+                historyItem.setFormattedDate("No Date");
+            }
+            orderHistory.add(historyItem);
+        }
+
+        response.addObject("orderHistory", orderHistory);
         return response;
     }
 }

@@ -91,11 +91,10 @@
 
 <%--<%@ include file="../include/footer.jsp" %>--%>
 
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../include/header.jsp" %>
 
 <link href="/pub/css/product.css" rel="stylesheet">
@@ -115,9 +114,17 @@
                                     data-bs-target="#order${history.order.id}">
                                 <div class="d-flex justify-content-between align-items-center w-100">
                                     <span>Order #${history.order.id}</span>
-                                    <span class="text-muted">
-                                        <fmt:formatDate value="${history.order.orderDate}" pattern="MMM dd, yyyy HH:mm"/>
-                                    </span>
+
+
+
+<span class="text-muted">
+    <span class="text-muted">
+    ${history.formattedDate}
+    </span>
+</span>
+
+
+
                                 </div>
                             </button>
                         </h2>
