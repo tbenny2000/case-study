@@ -30,22 +30,22 @@ authentication system with different user roles (Admin and User) to ensure appro
 ## Application Screenshots
 
 ## Database Schema
-(https://github.com/tbenny2000/case-study/blob/main/FinalERDiagram.jpg?raw=true)
+![image alt](https://github.com/tbenny2000/case-study/blob/main/FinalERDiagram.jpg?raw=true)
 
 
 ### User Profile
 Manage your account details and view order history in the user profile section.
-(https://github.com/tbenny2000/case-study/blob/main/UserProfile.jpg?raw=true)
+![image alt](https://github.com/tbenny2000/case-study/blob/main/UserProfile.jpg?raw=true)
 
 
 ### Product Catalog
 Browse through our extensive collection of soccer products with an intuitive search and filter system.
-(https://github.com/tbenny2000/case-study/blob/main/ProductCatalog.jpg?raw=true)
+![image alt](https://github.com/tbenny2000/case-study/blob/main/ProductCatalog.jpg?raw=true)
 
 
 ### Shopping Cart
 Easily manage your selected items with our responsive shopping cart interface.
-(https://github.com/tbenny2000/case-study/blob/main/CheckoutCart.jpg?raw=true)
+![image alt](https://github.com/tbenny2000/case-study/blob/main/CheckoutCart.jpg?raw=true)
 
 
 ### Admin Dashboard
