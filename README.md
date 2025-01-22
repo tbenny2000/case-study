@@ -27,30 +27,32 @@ authentication system with different user roles (Admin and User) to ensure appro
 - BCrypt for password encryption
 - Bootstrap Icons
 
-## Database Schema
-picture
-
 ## Application Screenshots
-picture
 
-### Product Catalog
-Browse through our extensive collection of soccer products with an intuitive search and filter system.
-picture
+## Database Schema
+(https://github.com/tbenny2000/case-study/blob/main/FinalERDiagram.jpg?raw=true)
 
-### Shopping Cart
-Easily manage your selected items with our responsive shopping cart interface.
-picture
 
 ### User Profile
 Manage your account details and view order history in the user profile section.
-picture
+(https://github.com/tbenny2000/case-study/blob/main/UserProfile.jpg?raw=true)
+
+
+### Product Catalog
+Browse through our extensive collection of soccer products with an intuitive search and filter system.
+(https://github.com/tbenny2000/case-study/blob/main/ProductCatalog.jpg?raw=true)
+
+
+### Shopping Cart
+Easily manage your selected items with our responsive shopping cart interface.
+(https://github.com/tbenny2000/case-study/blob/main/CheckoutCart.jpg?raw=true)
+
 
 ### Admin Dashboard
 Administrators can manage products, users, and orders through a comprehensive dashboard.
 picture
 
 ## Features
-
 - User Authentication and Authorization
 - Product Catalog with Search and Filter
 - Shopping Cart Management
@@ -61,6 +63,3 @@ picture
 - Order History Tracking
 
 ## Installation and Setup
-
-1. Clone the repository
-```bash git clone https://github.com/tbenny2000/case-study
