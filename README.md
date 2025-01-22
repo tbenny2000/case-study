@@ -6,6 +6,9 @@ their shopping cart, and complete purchases, while administrators have additiona
 capabilities to manage products and user accounts. The application provides a secure 
 authentication system with different user roles (Admin and User) to ensure appropriate access control.
 
+The Soccer Store is a comprehensive e-commerce platform designed for soccer enthusiasts to browse and purchase soccer equipment and gear. Users can explore products, manage their shopping cart, and complete purchases, while administrators have additional capabilities to manage products and user accounts. The application provides a secure authentication system with different user roles (Admin and User) to ensure appropriate access control.
+
+
 ## Technologies Used
 
 ### Backend
@@ -26,6 +29,7 @@ authentication system with different user roles (Admin and User) to ensure appro
 - Lombok
 - BCrypt for password encryption
 - Bootstrap Icons
+
 
 ## Database Schema
 picture
@@ -49,6 +53,26 @@ picture
 Administrators can manage products, users, and orders through a comprehensive dashboard.
 picture
 
+## Application Screenshots
+
+## Database Schema
+![Database Schema](https://github.com/tbenny2000/case-study/blob/main/FinalERDiagram.jpg?raw=true)
+
+### Product Catalog 
+Browse through our extensive collection of soccer products with an intuitive search and filter system.
+![Product Catalog](https://github.com/tbenny2000/case-study/blob/main/ProductCatalog.jpg?raw=true)
+
+
+### Shopping Cart
+Easily manage your selected items with our responsive shopping cart interface.
+![Shopping Cart](https://github.com/tbenny2000/case-study/blob/main/CheckoutCart.jpg?raw=true)
+
+
+### User Profile
+Manage your account details and view order/s history in the user profile section.
+![User Profile](https://github.com/tbenny2000/case-study/blob/main/UserProfile.jpg?raw=true)
+
+
 ## Features
 
 - User Authentication and Authorization
@@ -59,8 +83,3 @@ picture
 - Admin Product Management
 - Responsive Design
 - Order History Tracking
-
-## Installation and Setup
-
-1. Clone the repository
-```bash git clone https://github.com/tbenny2000/case-study
