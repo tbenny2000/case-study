@@ -23,22 +23,24 @@ The Soccer Store is a comprehensive e-commerce platform designed for soccer enth
 - BCrypt for password encryption
 - Bootstrap Icons
 
+## Application Screenshots
+
 ## Database Schema
 ![Database Schema](https://github.com/tbenny2000/case-study/blob/main/FinalERDiagram.jpg?raw=true)
 
-## Application Screenshots
-
-### Product Catalog
+### Product Catalog 
 Browse through our extensive collection of soccer products with an intuitive search and filter system.
 ![Product Catalog](https://github.com/tbenny2000/case-study/blob/main/ProductCatalog.jpg?raw=true)
 
+
 ### Shopping Cart
 Easily manage your selected items with our responsive shopping cart interface.
-![Shopping Cart](https://github.com/tbenny2000/case-study/blob/main/CheckoutCart.jpg?raw=true))
+![Shopping Cart](https://github.com/tbenny2000/case-study/blob/main/CheckoutCart.jpg?raw=true)
+
 
 ### User Profile
 Manage your account details and view order/s history in the user profile section.
-![User Profile](https://github.com/tbenny2000/case-study/blob/main/UserProfile.jpg?raw=true))
+![User Profile](https://github.com/tbenny2000/case-study/blob/main/UserProfile.jpg?raw=true)
 
 
 ## Features
