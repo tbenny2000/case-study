@@ -30,7 +30,7 @@ The Soccer Store is a comprehensive e-commerce platform designed for soccer enth
 
 ### Product Catalog
 Browse through our extensive collection of soccer products with an intuitive search and filter system.
-![Product Catalog](https://github.com/[username]/[reponame]/blob/[branch]/product-catalog.jpg?raw=true)
+![Product Catalog](https://github.com/tbenny2000/case-study/blob/main/ProductCatalog.jpg?raw=true)
 
 ### Shopping Cart
 Easily manage your selected items with our responsive shopping cart interface.
