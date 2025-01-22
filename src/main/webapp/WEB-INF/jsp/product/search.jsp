@@ -1,12 +1,12 @@
 <head>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<jsp:include page="../include/header.jsp"/>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+    <jsp:include page="../include/header.jsp"/>
 
-<link href="/pub/css/product.css" rel="stylesheet">
+    <link href="/pub/css/product.css" rel="stylesheet">
 </head>
 
-<!-- Hero Section with Search -->
+<!-- HERO SECTION WITH SEARCH -->
 <div class="hero-section">
     <div class="container">
         <div class="row justify-content-center">
@@ -24,31 +24,43 @@
     </div>
 </div>
 
-<!-- Filters Section -->
+
+<!-- ============= INLINE STYLE ====== -->
+<style>
+    .sort-dropdown {
+        width: auto;
+        min-width: 180px;  /* Reduced from previous size */
+        margin-left: auto;
+    }
+</style>
+
+<!-- ============ FILTER SECTION ===============-->
 <div class="container mt-4 mb-4">
     <div class="row align-items-center">
         <div class="col-md-6">
             <h4 class="mb-0">${empty search ? 'All Products' : 'Search Results'}</h4>
             <p class="text-muted">Showing ${products.size()} products</p>
         </div>
+        <!-- ========= SEARCH BY NAME AND PRICE ============== -->
         <div class="col-md-6 text-end">
-            <select class="form-select d-inline-block w-auto"
-                    onchange="window.location.href=this.value">
+            <!-- Update your select element -->
+            <select class="form-select sort-dropdown" onchange="window.location.href=this.value">
                 <option value="/product/search?search=${search}">Sort by...</option>
-                <option value="/product/search?search=${search}&price=low_to_high"
-                ${param.price == 'low_to_high' ? 'selected' : ''}>
-                    Price: Low to High
-                </option>
-                <option value="/product/search?search=${search}&price=high_to_low"
-                ${param.price == 'high_to_low' ? 'selected' : ''}>
-                    Price: High to Low
-                </option>
+                <option value="/product/search?search=${search}&sort=name_asc"
+                ${param.sort == 'name_asc' ? 'selected' : ''}>A to Z</option>
+                <option value="/product/search?search=${search}&sort=name_desc"
+                ${param.sort == 'name_desc' ? 'selected' : ''}>Z to A</option>
+                <option value="/product/search?search=${search}&sort=price_low_to_high"
+                ${param.sort == 'price_low_to_high' ? 'selected' : ''}>Price: Low-High</option>
+                <option value="/product/search?search=${search}&sort=price_high_to_low"
+                ${param.sort == 'price_high_to_low' ? 'selected' : ''}>Price: High-Low</option>
             </select>
+
         </div>
     </div>
 </div>
 
-<!-- Products Grid -->
+<!-- ============= PRODUCTS GRID =========== -->
 <div class="container mb-5">
     <div class="row">
         <c:forEach items="${products}" var="product">

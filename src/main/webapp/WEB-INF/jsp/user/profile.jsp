@@ -8,12 +8,10 @@
 </head>
 
 <div class="profile-container">
-    <div class="row">
-        <div class="col-12">
+    <div class="col">
+        <div class="col-6">
             <div class="form-section">
                 <h2 class="text-center mb-4">My Profile</h2>
-
-                <!-- Messages -->
                 <c:if test="${not empty success}">
                     <div class="alert alert-success" role="alert">
                             ${success}
@@ -31,19 +29,19 @@
                     <div class="mb-4">
                         <h4>Personal Information</h4>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="firstName" class="form-label">First Name</label>
                                 <form:input path="firstName" class="form-control"/>
                                 <form:errors path="firstName" class="text-danger"/>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="lastName" class="form-label">Last Name</label>
                                 <form:input path="lastName" class="form-control"/>
                                 <form:errors path="lastName" class="text-danger"/>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="email" class="form-label">Email</label>
                                 <form:input path="email" type="email" class="form-control"/>
                                 <form:errors path="email" class="text-danger"/>
@@ -52,7 +50,7 @@
                     </div>
 
                     <!-- Contact Information -->
-                    <div class="mb-4">
+                    <div class="mb-3">
                         <h4>Contact Information</h4>
                         <div class="row">
                             <div class="col-md-3">
@@ -60,14 +58,14 @@
                                 <form:input path="phone" class="form-control"/>
                             </div>
 
-                            <div class="col-md-9">
+                            <div class="col-md-6">
                                 <label for="address" class="form-label">Address</label>
                                 <form:input path="address" class="form-control"/>
                             </div>
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="city" class="form-label">City</label>
                                 <form:input path="city" class="form-control"/>
                             </div>
@@ -93,14 +91,14 @@
                     <div class="mb-4">
                         <h4>Change Password</h4>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <label for="password" class="form-label">New Password</label>
                                 <form:password path="password" class="form-control"/>
                                 <small class="text-muted">Leave blank to keep current password</small>
                                 <form:errors path="password" class="text-danger"/>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <label for="confirmPassword" class="form-label">Confirm New Password</label>
                                 <form:password path="confirmPassword" class="form-control"/>
                                 <form:errors path="confirmPassword" class="text-danger"/>
@@ -110,7 +108,7 @@
 
                     <!-- Submit Button -->
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-10">
                             <button type="submit" class="btn btn-primary w-100">Update Profile</button>
                         </div>
                     </div>

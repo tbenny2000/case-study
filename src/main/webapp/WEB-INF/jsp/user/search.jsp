@@ -1,6 +1,7 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:include page="../include/header.jsp"/>
-
+<head>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <jsp:include page="../include/header.jsp"/>
+</head>
 <section class="bg-light2 pt-5 pb-5">
     <div class="container">
         <h1 class="text-center">User Search</h1>
@@ -34,54 +35,55 @@
 
 <c:if test="${not empty search}">
     <section class="bg-light2 pt-5 pb-5">
-    <div class="container">
-    <h2 class="text-center">Users Found (${usersKey.size()})</h2>
+        <div class="container">
+            <h2 class="text-center">Users Found (${usersKey.size()})</h2>
 
-    <div class="table-responsive mt-5">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Zip Code</th>
-                    <th>Country</th>
-                    <th>Image</th>
-                    <th>Edit</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="user" items="${usersKey}">
+            <div class="table-responsive mt-5">
+                <table class="table table-striped">
+                    <thead>
                     <tr>
-                        <td>${user.id}</td>
-                        <td>${user.firstName}</td>
-                        <td>${user.lastName}</td>
-                        <td>${user.email}</td>
-                        <td>${user.password}</td>
-                        <td>${user.phone}</td>
-                        <td>${user.address}</td>
-                        <td>${user.city}</td><td>${user.id}</td>
-                        <td>${user.state}</td>
-                        <td>${user.zip}</td>
-                        <td>${user.country}</td>
-                        <td>
-                            <img src="${user.imageUrl}" style="width:200px;"/>
-                        </td>
-                        <td>
-                            <a href="/user/edit/${user.id}" >Edit</a>
-                        </td>
+                        <th>id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip Code</th>
+                        <th>Country</th>
+                        <th>Image</th>
+                        <th>Edit</th>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </div>
-    </div>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="user" items="${usersKey}">
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>${user.firstName}</td>
+                            <td>${user.lastName}</td>
+                            <td>${user.email}</td>
+                            <td>${user.password}</td>
+                            <td>${user.phone}</td>
+                            <td>${user.address}</td>
+                            <td>${user.city}</td>
+                            <td>${user.id}</td>
+                            <td>${user.state}</td>
+                            <td>${user.zip}</td>
+                            <td>${user.country}</td>
+                            <td>
+                                <img src="${user.imageUrl}" style="width:200px;"/>
+                            </td>
+                            <td>
+                                <a href="/user/edit/${user.id}">Edit</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </section>
 </c:if>
 

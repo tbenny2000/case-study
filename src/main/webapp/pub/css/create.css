@@ -1,8 +1,9 @@
 /* Create Account Page Styling */
 .create-container {
-    width: 80%;
-    margin: 40px auto;
-    padding: 20px;
+    width: auto;
+    margin: 0;
+    padding: 0;
+
 }
 
 .form-section {

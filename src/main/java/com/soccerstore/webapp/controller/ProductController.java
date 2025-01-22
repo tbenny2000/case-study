@@ -123,23 +123,6 @@ public class ProductController {
     }
 
     // ============= DELETE PRODUCT ================
-//    @GetMapping("/product/delete/{id}")
-//    public ModelAndView deleteProduct(@PathVariable Integer id) {
-//        ModelAndView response = new ModelAndView("redirect:/product/search");
-//
-//        // Find the product by ID
-//        Optional<Product> productOptional = productDAO.findById(id);
-//        if (productOptional.isPresent()) {
-//            // Delete the product
-//            productDAO.delete(productOptional.get());
-//        } else {
-//            // Optionally add an error message if the product is not found
-//            response.addObject("errorMessage", "Product not found with ID: " + id);
-//        }
-//
-//        return response;
-//    }
-
     @GetMapping("/product/delete/{id}")
     public ModelAndView deleteProduct(@PathVariable Integer id) {
         ModelAndView response = new ModelAndView("redirect:/product/search");
@@ -159,9 +142,48 @@ public class ProductController {
     }
 
     // ============= PRODUCT SEARCH ================
+//    @GetMapping("/product/search")
+//    public ModelAndView search(@RequestParam(required = false) String search,
+//                               @RequestParam(required = false) String price) {
+//        ModelAndView response = new ModelAndView("product/search");
+//
+//        List<Product> products;
+//        if (search != null && !search.trim().isEmpty()) {
+//            products = productDAO.findByNameContainingIgnoreCase(search);
+//        } else {
+//            products = productDAO.findAll();
+//        }
+//
+//        //log.debug("Before sorting - Number of products: " + products.size());
+//        //log.debug("Price sort parameter: " + price);
+//
+//        // Convert list to ArrayList if it isn't already
+//        products = new ArrayList<>(products);
+//
+//        // Sort products by price
+//        if ("low_to_high".equals(price)) {
+//            products.sort(Comparator.comparingDouble(Product::getPrice));
+//            //log.debug("Sorting low to high");
+//        } else if ("high_to_low".equals(price)) {
+//            products.sort((p1, p2) -> Double.compare(p2.getPrice(), p1.getPrice()));
+//            //log.debug("Sorting high to low");
+//        }
+//
+//        // Log all products prices for debugging
+//        for (Product p : products) {
+//            //log.debug("Product: " + p.getName() + " - Price: " + p.getPrice());
+//        }
+//
+//        response.addObject("products", products);
+//        response.addObject("search", search);
+//
+//        return response;
+//    }
+
     @GetMapping("/product/search")
     public ModelAndView search(@RequestParam(required = false) String search,
-                               @RequestParam(required = false) String price) {
+                               @RequestParam(required = false) String price,
+                               @RequestParam(required = false) String sort) {
         ModelAndView response = new ModelAndView("product/search");
 
         List<Product> products;
@@ -171,24 +193,23 @@ public class ProductController {
             products = productDAO.findAll();
         }
 
-        //log.debug("Before sorting - Number of products: " + products.size());
-        //log.debug("Price sort parameter: " + price);
-
         // Convert list to ArrayList if it isn't already
         products = new ArrayList<>(products);
 
-        // Sort products by price
-        if ("low_to_high".equals(price)) {
-            products.sort(Comparator.comparingDouble(Product::getPrice));
-            //log.debug("Sorting low to high");
-        } else if ("high_to_low".equals(price)) {
-            products.sort((p1, p2) -> Double.compare(p2.getPrice(), p1.getPrice()));
-            //log.debug("Sorting high to low");
-        }
-
-        // Log all products prices for debugging
-        for (Product p : products) {
-            //log.debug("Product: " + p.getName() + " - Price: " + p.getPrice());
+        // Sort products based on parameter
+        switch (sort != null ? sort : "") {
+            case "name_asc":
+                products.sort(Comparator.comparing(Product::getName));
+                break;
+            case "name_desc":
+                products.sort(Comparator.comparing(Product::getName).reversed());
+                break;
+            case "price_low_to_high":
+                products.sort(Comparator.comparingDouble(Product::getPrice));
+                break;
+            case "price_high_to_low":
+                products.sort((p1, p2) -> Double.compare(p2.getPrice(), p1.getPrice()));
+                break;
         }
 
         response.addObject("products", products);

@@ -39,6 +39,8 @@
             </div>
         </div>
     </div>
+
+    <!-- =========== CHECKOUT ============== -->
     <div class="row">
         <div class="col-12 text-center">
             <a href="/order/checkout" class="btn btn-primary">Checkout</a>
@@ -46,7 +48,4 @@
     </div>
 </section>
 
-
-
-
-<%--<jsp:include page="../include/footer.jsp" />--%>
+<jsp:include page="../include/footer.jsp" />

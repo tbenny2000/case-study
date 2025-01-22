@@ -7,7 +7,7 @@
 
 <div class="auth-container">
     <div class="row justify-content-center">
-        <div class="col-12">
+        <div class="col-6">
             <div class="form-section">
                 <h2 class="text-center mb-4">Login</h2>
 
