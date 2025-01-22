@@ -30,16 +30,19 @@ public class SecurityConfig {
                         "/pub/**",
                         "/index",
                         "/login/**",
+                        "/user/createUser",
                         "/product/search",  // Allow product browsing
                         "/product/details/**", // Allow viewing product details
                         "/css/**",
                         "/js/**",
-                        "/images/**"
+                        "/images/**",
+                        "/error/**"
                 ).permitAll()
                 // Restricted paths
-                .requestMatchers("/product/create", "/product/edit/**").hasAnyAuthority("ADMIN")
+                .requestMatchers("/product/create", "/product/edit/**", "/product/delete/**").hasAuthority("ADMIN")
                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
                 .requestMatchers("/user/profile/**").authenticated()  // Only authenticated users can access their profile
+                .requestMatchers("/order/history").authenticated()
                 .requestMatchers("/checkout/**").authenticated()  // Require login for checkout
                 .anyRequest().permitAll()  // Allow public access by default
         );

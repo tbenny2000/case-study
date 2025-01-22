@@ -1,4 +1,6 @@
-<%@ include file="../include/header.jsp" %>
+<head>
+    <%@ include file="../include/header.jsp" %>
+</head>
 <div class="container mt-4 text-center">
     <h1>404 - Page Not Found</h1>
     <p>The page you're looking for doesn't exist.</p>

@@ -1,14 +1,150 @@
-/* Profile-specific styles */
-.profile-header {
+/* Profile Container */
+.profile-container {
+    width: 80%;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* Profile Section */
+.profile-section {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     margin-bottom: 2rem;
 }
 
-.profile-section {
+/* Profile Header */
+.profile-header {
+    text-align: center;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 2px solid #eee;
 }
 
+.profile-header h2 {
+    color: #2c3e50;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Section Headers */
 .profile-section-title {
+    color: #2c3e50;
+    font-size: 1.25rem;
+    font-weight: 600;
     margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #eee;
+}
+
+/* Form Groups */
+.profile-form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Form Controls */
+.profile-form-control {
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    border: 1px solid #dee2e6;
+    transition: all 0.2s ease;
+}
+
+.profile-form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    outline: 0;
+}
+
+/* Labels */
+.profile-label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+/* Buttons */
+.profile-btn {
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.profile-btn-primary {
+    background-color: #0d6efd;
+    border: none;
+    color: white;
+}
+
+.profile-btn-primary:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-1px);
+}
+
+/* Order History Section */
+.order-history {
+    margin-top: 2rem;
+}
+
+.order-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.order-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Error Messages */
+.profile-error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Success Messages */
+.profile-success {
+    color: #198754;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .profile-section {
+        padding: 20px;
+    }
+
+    .profile-btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Optional: Animation */
+.profile-section {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -14,12 +14,13 @@ public class UserRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "users_id")
-    private Integer userId;
+    @ManyToOne
+    @JoinColumn(name = "users_id", nullable = false)
+    private User user;
 
     @Column(name = "role_name")
     private String roleName;
 }
+

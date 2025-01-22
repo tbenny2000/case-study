@@ -64,9 +64,9 @@
                                 </a>
                             </sec:authorize>
                             <sec:authorize access="hasAuthority('ADMIN')">
-                                <a href="/product/edit/${product.id}" class="btn btn-outline-light btn-sm">
-                                    Edit
-                                </a>
+                                <a href="/product/edit/${product.id}" class="btn btn-outline-light btn-sm">Edit</a>
+                                <a href="/product/delete/${product.id}" class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
                             </sec:authorize>
                         </div>
                     </div>
@@ -99,4 +99,4 @@
     </c:if>
 </div>
 
-<jsp:include page="../include/footer.jsp"/><jsp:include page="../include/footer.jsp"/>
+<jsp:include page="../include/footer.jsp"/>

@@ -1,5 +1,6 @@
 package com.soccerstore.webapp.controller;
 
+import com.soccerstore.webapp.database.dao.UserDAO;
 import com.soccerstore.webapp.database.entity.User;
 import com.soccerstore.webapp.security.AuthenticatedUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,15 +14,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 
-    @Autowired
-    private AuthenticatedUserService authenticatedUserService;
+//    @Autowired
+//    private UserDAO userDAO;
+//    @Autowired
+//    private AuthenticatedUserService authenticatedUserService;
 
     @GetMapping(value = {"/", "/index", "/index.html"})
     public ModelAndView index() {
 
-        User user = authenticatedUserService.loadCurrentUser();
+        //User user = authenticatedUserService.loadCurrentUser();
 
-        // query the order from the DB using the username and email
         ModelAndView response = new ModelAndView("index");
         response.setViewName("index");
         return response;

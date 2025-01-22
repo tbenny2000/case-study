@@ -1,21 +1,18 @@
-<head>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <jsp:include page="../include/header.jsp"/>
-    <link href="/pub/css/product.css" rel="stylesheet">
-</head>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="../include/header.jsp"/>
 
-<div class="create-container">
+<link href="/pub/css/product.css" rel="stylesheet">
+
+<div class="product-container">
     <div class="row">
         <div class="col-12">
             <div class="form-section">
-                <h2 class="text-center mb-4">${empty form.id ? 'Create' : 'Edit'} User</h2>
+                <h2 class="text-center mb-4">${empty form.id ? 'Create' : 'Edit'} Account</h2>
 
                 <form action="/user/createUser" method="POST">
-                    <input type="hidden" name="id" value="${form.id}"/>
-
                     <!-- Personal Information -->
                     <div class="mb-4">
-                        <h4 class="mb-3">Personal Information</h4>
+                        <h4 class="section-header">Personal Information</h4>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName" class="form-label">First Name</label>
@@ -58,30 +55,16 @@
                             <div class="col-md-6 mb-3">
                                 <label for="phone" class="form-label">Phone</label>
                                 <input type="text" class="form-control form-control-lg" id="phone" name="phone" value="${form.phone}">
-                                <c:if test="${bindingResult.hasFieldErrors('phone')}">
-                                    <div class="text-danger">
-                                        <c:forEach items="${bindingResult.getFieldErrors('phone')}" var="error">
-                                            ${error.defaultMessage}
-                                        </c:forEach>
-                                    </div>
-                                </c:if>
                             </div>
                         </div>
                     </div>
 
                     <!-- Address Information -->
                     <div class="mb-4">
-                        <h4 class="mb-3">Address Information</h4>
+                        <h4 class="section-header">Address Information</h4>
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
                             <input type="text" class="form-control form-control-lg" id="address" name="address" value="${form.address}">
-                            <c:if test="${bindingResult.hasFieldErrors('address')}">
-                                <div class="text-danger">
-                                    <c:forEach items="${bindingResult.getFieldErrors('address')}" var="error">
-                                        ${error.defaultMessage}
-                                    </c:forEach>
-                                </div>
-                            </c:if>
                         </div>
 
                         <div class="row">
@@ -107,31 +90,29 @@
                         </div>
                     </div>
 
-                    <!-- Password Section (only for new users) -->
-                    <c:if test="${empty form.id}">
-                        <div class="mb-4">
-                            <h4 class="mb-3">Security</h4>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control form-control-lg" id="password" name="password">
-                                    <c:if test="${bindingResult.hasFieldErrors('password')}">
-                                        <div class="text-danger">
-                                            <c:forEach items="${bindingResult.getFieldErrors('password')}" var="error">
-                                                ${error.defaultMessage}
-                                            </c:forEach>
-                                        </div>
-                                    </c:if>
-                                </div>
+                    <!-- Password Section -->
+                    <div class="mb-4">
+                        <h4 class="section-header">Security</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control form-control-lg" id="password" name="password">
+                                <c:if test="${bindingResult.hasFieldErrors('password')}">
+                                    <div class="text-danger">
+                                        <c:forEach items="${bindingResult.getFieldErrors('password')}" var="error">
+                                            ${error.defaultMessage}
+                                        </c:forEach>
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
-                    </c:if>
+                    </div>
 
                     <!-- Submit Buttons -->
                     <div class="row mt-4">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
-                            <a href="/user/search" class="btn btn-secondary btn-lg ms-2">Cancel</a>
+                            <button type="submit" class="btn btn-primary btn-lg">Create Account</button>
+                            <a href="/login/login" class="btn btn-secondary btn-lg ms-2">Already have an account?</a>
                         </div>
                     </div>
                 </form>

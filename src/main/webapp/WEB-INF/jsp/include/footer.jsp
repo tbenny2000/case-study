@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/pub/css/signup.css">
+<link rel="stylesheet" href="/pub/css/global.css">
 
 
 <div class="footer-bottom">
