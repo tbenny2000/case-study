@@ -1,65 +1,51 @@
-# Soccer Store Web Application
+# Soccer Store – Full Stack E-Commerce Application
 
-The Soccer Store is a comprehensive e-commerce platform designed for soccer enthusiasts 
-to browse and purchase soccer equipment and gear. Users can explore products, manage 
-their shopping cart, and complete purchases, while administrators have additional 
-capabilities to manage products and user accounts. The application provides a secure 
-authentication system with different user roles (Admin and User) to ensure appropriate access control.
+## Overview
 
-## Technologies Used
+Soccer Store is a full-stack e-commerce web application designed to simulate a real online retail system for soccer equipment and merchandise. The project demonstrates full-stack development skills including backend logic, database integration, and dynamic web functionality.
 
-### Backend
-- Spring Boot
-- Spring Security for authentication and authorization
-- Spring Data JPA for database management
-- Spring MVC for web layer
-- MySQL database
+## Key Features
 
-### Frontend
-- JSP (JavaServer Pages)
-- HTML/CSS
-- Bootstrap 5
-- JavaScript
+* User registration and login system
+* Product browsing and selection
+* Shopping cart functionality
+* Order processing workflow
+* MySQL database integration for persistent storage
+* Dynamic web pages with server-side logic
 
-### Build Tools & Others
-- Maven
-- Lombok
-- BCrypt for password encryption
-- Bootstrap Icons
+## Tech Stack
 
-## Application Screenshots
+* Java
+* MySQL
+* HTML/CSS
+* JavaScript
+* PHP (or servlet-based backend depending on implementation)
+* Apache/Tomcat (if applicable)
 
-## Database Schema
-![image alt](https://github.com/tbenny2000/case-study/blob/main/FinalERDiagram.jpg?raw=true)
+## System Design
 
+The application follows a multi-layer architecture:
 
-### User Profile
-Manage your account details and view order history in the user profile section.
-![image alt](https://github.com/tbenny2000/case-study/blob/main/UserProfile.jpg?raw=true)
+* Presentation Layer: Front-end UI (HTML/CSS/JS)
+* Application Layer: Java-based business logic
+* Data Layer: MySQL relational database
 
+## Database Design
 
-### Product Catalog
-Browse through our extensive collection of soccer products with an intuitive search and filter system.
-![image alt](https://github.com/tbenny2000/case-study/blob/main/ProductCatalog.jpg?raw=true)
+The system uses a relational database to manage:
 
+* Users
+* Products
+* Orders
+* Inventory
 
-### Shopping Cart
-Easily manage your selected items with our responsive shopping cart interface.
-![image alt](https://github.com/tbenny2000/case-study/blob/main/CheckoutCart.jpg?raw=true)
+## Purpose
 
+This project was built to demonstrate full-stack development fundamentals including database design, server-side programming, and web application architecture.
 
-### Admin Dashboard
-Administrators can manage products, users, and orders through a comprehensive dashboard.
-picture
+## Future Improvements
 
-## Features
-- User Authentication and Authorization
-- Product Catalog with Search and Filter
-- Shopping Cart Management
-- Secure Checkout Process
-- User Profile Management
-- Admin Product Management
-- Responsive Design
-- Order History Tracking
-
-## Installation and Setup
+* Migrate backend to Spring Boot REST API architecture
+* Add React frontend for improved UI experience
+* Implement JWT authentication
+* Improve scalability and separation of concerns
